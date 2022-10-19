@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include "main.h"
 /**
  * printstring - prints a string to standard output
