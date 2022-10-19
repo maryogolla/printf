@@ -9,41 +9,48 @@ int _printf(const char *format, ...)
 {
 	int i = 0;
 	va_list list;
+	const char *s = format;
 
 	va_start(list, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-		return (-1);
-	while (*format != '\0')
+	if (format == NULL || list == NULL)
 	{
-		if (*format == '%')
+		return (i);
+	}
+	while (*s != '\0')
+	{
+		if (*s == '%')
 		{
-			format++;
-			if (*format == 'c')
+			s++;
+			if (*s == 'c')
 			{
 				i += _putchar(va_arg(list, int));
-				format++;
+				s++;
 			}
-			else if (*format == 's')
+			else if (*s == 's')
 			{
 				i += printstring(va_arg(list, char *));
-				format++;
+				s++;
 			}
-			else if (*format == 'd' || *format == 'i')
+			else if (*s == 'd' || *s == 'i')
 			{
 				i += printint(va_arg(list, int));
-				format++;
+				s++;
 			}
-			else if (*format == '%')
+			else if (*s == '%')
 			{
-				i += _putchar(*format);
-				format++;
+				i += _putchar(*s);
+				s++;
 			}
 			else
-				format--;
+			{
+				s--;
+				_putchar(*s);
+				s++;
+			}
 		}
-		_putchar(*format);
+		_putchar(*s);
 		i++;
-		format++;
+		s++;
 	}
 	va_end(list);
 	return (i);
