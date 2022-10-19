@@ -33,6 +33,13 @@ int _printf(const char *format, ...)
 				i += printint(va_arg(list, int));
 				format++;
 			}
+			else if (*format == '%')
+			{
+				i += _putchar(*format);
+				format++;
+			}
+			else
+				format--;
 		}
 		_putchar(*format);
 		i++;
