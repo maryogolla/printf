@@ -28,6 +28,11 @@ int _printf(const char *format, ...)
 				i += printstring(va_arg(list, char *));
 				format++;
 			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				i += printint(va_arg(list, int));
+				format++;
+			}
 		}
 		_putchar(*format);
 		i++;
